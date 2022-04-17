@@ -53,10 +53,6 @@ dir(math)
 
 # determine the type of an object
 type(2)         # returns 'int'
-type(2.0)       # returns 'float'
-type('two')     # returns 'str'
-type(True)      # returns 'bool'
-type(None)      # returns 'NoneType'
 
 # check if an object is of a given type
 isinstance(2.0, int)            # returns False
@@ -64,8 +60,6 @@ isinstance(2.0, (int, float))   # returns True
 
 # convert an object to a given type
 float(2)
-int(2.9)
-str(2.9)
 
 # zero, None, and empty containers are converted to False
 bool(0)
@@ -74,28 +68,15 @@ bool('')    # empty string
 bool([])    # empty list
 bool({})    # empty dictionary
 
-# non-empty containers and non-zeros are converted to True
-bool(2)
-bool('two')
-bool([2])
 
 
-
-### MATH ###
+### MATHS ###
 
 # basic operations
-10 + 4          # add (returns 14)
-10 - 4          # subtract (returns 6)
-10 * 4          # multiply (returns 40)
 10 ** 4         # exponent (returns 10000)
 5 % 4           # modulo (returns 1) - computes the remainder
-10 / 4          # divide (returns 2 in Python 2, returns 2.5 in Python 3)
-10 / float(4)   # divide (returns 2.5)
-
-# force '/' in Python 2 to perform 'true division' (unnecessary in Python 3)
-from __future__ import division
-10 / 4          # true division (returns 2.5)
-10 // 4         # floor division (returns 2)
+10 / 4          # divide (returns 2.5 in python 3)
+10 // 4         # floor devision (returns 2)
 
 
 
@@ -104,13 +85,13 @@ from __future__ import division
 # assignment statement
 x = 5
 
-# comparisons (these return True)
+# comparisons (all return True)
 x > 3
 x >= 3
 x != 3
 x == 5
 
-# boolean operations (these return True)
+# boolean operations (all return True)
 5 > 3 and 6 > 3
 5 > 3 or 5 < 3
 not False
@@ -119,16 +100,6 @@ False or not False and True     # evaluation order: not, and, or
 
 
 ### CONDITIONAL STATEMENTS ###
-
-# if statement
-if x > 0:
-    print('positive')
-
-# if/else statement
-if x > 0:
-    print('positive')
-else:
-    print('zero or negative')
 
 # if/elif/else statement
 if x > 0:
@@ -173,6 +144,9 @@ simpsons[0] = 'krusty'                  # replace element 0
 # concatenate lists (slower than 'extend' method)
 neighbors = simpsons + ['ned', 'rod', 'todd']
 
+# create a single list with elements repeated
+[3, 4] * 2          # returns [3, 4, 3, 4]
+
 # find elements in a list
 simpsons.count('lisa')      # counts the number of instances
 simpsons.index('itchy')     # returns index of first instance
@@ -214,10 +188,10 @@ new_num = num[:]
 new_num = list(num)
 
 # examine objects
-num is same_num         # returns True (checks whether they are the same object)
-num is new_num          # returns False
-num == same_num         # returns True (checks whether they have the same contents)
-num == new_num          # returns True
+num is same_num         # returns True
+num is new_num          # returns False (different objects)
+num == same_num         # returns True
+num == new_num          # returns True (same contents)
 
 
 
@@ -242,7 +216,7 @@ digits[2] = 2       # throws an error
 # concatenate tuples
 digits = digits + (3, 4)
 
-# create a single tuple with elements repeated (also works with lists)
+# create a single tuple with elements repeated
 (3, 4) * 2          # returns (3, 4, 3, 4)
 
 # sort a list of tuples
@@ -262,6 +236,7 @@ bart = ('male', 10, 'simpson')  # create a tuple
 # create a string
 s = str(42)         # convert another data type into a string
 s = 'I like you'
+s = "I like you"
 
 # examine a string
 s[0]                # returns 'I'
@@ -272,7 +247,7 @@ s[:6]               # returns 'I like'
 s[7:]               # returns 'you'
 s[-1]               # returns 'u'
 
-# basic string methods (does not modify the original string)
+# basic string methods (do not modify the original string)
 s.lower()           # returns 'i like you'
 s.upper()           # returns 'I LIKE YOU'
 s.startswith('I')   # returns True
@@ -310,6 +285,12 @@ s5.strip()          # returns 'ham and cheese'
 # more examples: https://mkaz.blog/code/python-string-format-cookbook/
 'pi is {:.2f}'.format(3.14159)      # returns 'pi is 3.14'
 
+# f-strings (introduced in python 3.6)
+# allow you to put fully-formed python expressions into the middle of strings
+pi = 3.14159
+f'pi is {pi:.2f}'       # returns 'pi is 3.14'
+f'2pi is {pi*2:.2f}'    # returns '2pi is 6.28'
+
 # normal strings versus raw strings
 print('first line\nsecond line')    # normal strings allow for escaped characters
 print(r'first line\nfirst line')    # raw strings treat backslashes as literal characters
@@ -327,23 +308,23 @@ empty_dict = {}
 empty_dict = dict()
 
 # create a dictionary (two ways)
-family = {'dad':'homer', 'mom':'marge', 'size':6}
-family = dict(dad='homer', mom='marge', size=6)
+family = {'dad':'homer', 'mum':'marge', 'size':6}
+family = dict(dad='homer', mum='marge', size=6)
 
 # convert a list of tuples into a dictionary
-list_of_tuples = [('dad', 'homer'), ('mom', 'marge'), ('size', 6)]
+list_of_tuples = [('dad', 'homer'), ('mum', 'marge'), ('size', 6)]
 family = dict(list_of_tuples)
 
 # examine a dictionary
 family['dad']       # returns 'homer'
 len(family)         # returns 3
-'mom' in family     # returns True
+'mum' in family     # returns True
 'marge' in family   # returns False (only checks keys)
 
 # returns a list (Python 2) or an iterable view (Python 3)
-family.keys()       # keys: ['dad', 'mom', 'size']
+family.keys()       # keys: ['dad', 'mum', 'size']
 family.values()     # values: ['homer', 'marge', 6]
-family.items()      # key-value pairs: [('dad', 'homer'), ('mom', 'marge'), ('size', 6)]
+family.items()      # key-value pairs: [('dad', 'homer'), ('mum', 'marge'), ('size', 6)]
 
 # modify a dictionary (does not return the dictionary)
 family['cat'] = 'snowball'              # add a new entry
@@ -354,8 +335,8 @@ family.pop('dad')                       # remove an entry and return the value (
 family.update({'baby':'maggie', 'grandpa':'abe'})   # add multiple entries
 
 # access values more safely with 'get'
-family['mom']                       # returns 'marge'
-family.get('mom')                   # equivalent
+family['mum']                       # returns 'marge'
+family.get('mum')                   # equivalent
 family['grandma']                   # throws an error since the key does not exist
 family.get('grandma')               # returns None instead
 family.get('grandma', 'not found')  # returns 'not found' (the default)
@@ -408,35 +389,6 @@ sorted(set([9, 0, 2, 1, 0]))    # returns [0, 1, 2, 9]
 
 ### DEFINING FUNCTIONS ###
 
-# define a function with no arguments and no return values
-def print_text():
-    print('this is text')
-
-# call the function
-print_text()
-
-# define a function with one argument and no return values
-def print_this(x):
-    print(x)
-
-# call the function
-print_this(3)       # prints 3
-n = print_this(3)   # prints 3, but doesn't assign 3 to n
-                    #   because the function has no return statement
-
-# define a function with one argument and one return value
-def square_this(x):
-    return x**2
-
-# include an optional docstring to describe the effect of a function
-def square_this(x):
-    """Return the square of a number."""
-    return x**2
-
-# call the function
-square_this(3)          # prints 9
-var = square_this(3)    # assigns 9 to var, but does not print 9
-
 # define a function with two 'positional arguments' (no default values) and
 # one 'keyword argument' (has a default value)
 def calc(a, b, op='add'):
@@ -474,18 +426,8 @@ min_num, max_num = min_max(nums)    # min_num = 1, max_num = 3
 ### ANONYMOUS (LAMBDA) FUNCTIONS ###
 ## primarily used to temporarily define a function for use by another function
 
-# define a function the "usual" way
-def squared(x):
-    return x**2
-
-# define an identical function using lambda
+# lambda function that returns x squared
 squared = lambda x: x**2
-
-# sort a list of strings by the last letter (without using lambda)
-simpsons = ['homer', 'marge', 'bart']
-def last_letter(word):
-    return word[-1]
-sorted(simpsons, key=last_letter)
 
 # sort a list of strings by the last letter (using lambda)
 sorted(simpsons, key=lambda word: word[-1])
@@ -512,7 +454,7 @@ for fruit in fruits:
     print(fruit.upper())
 
 # iterate through two things at once (using tuple unpacking)
-family = {'dad':'homer', 'mom':'marge', 'size':6}
+family = {'dad':'homer', 'mum':'marge', 'size':6}
 for key, value in family.items():
     print(key, value)
 
